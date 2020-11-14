@@ -19,7 +19,7 @@ async def vending_machine(ctx):
     embed=discord.Embed(title="**" + the_title + "**", color=0x47e18a)
     embed.set_thumbnail(url="https://media.discordapp.net/attachments/280298381807714304/776122672898768956/vending_machine.png")
     embed.add_field(name="_ _", value= the_prize, inline=False)
-    embed.set_footer(text="SquidCorp™")
+    embed.set_footer(text="VoidCorp™")
     await ctx.send(embed=embed)
 
 def setup(bot):
