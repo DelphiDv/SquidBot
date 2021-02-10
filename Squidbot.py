@@ -35,7 +35,8 @@ async def on_ready():
 bot.load_extension('simple')
 bot.load_extension('check')
 bot.load_extension('joke')
-bot.load_extension('vending_machine')   
+bot.load_extension('vending_machine')
+bot.load_extension('inspire')     
  
 @bot.command()
 async def ping(ctx):
