@@ -207,5 +207,9 @@ You get an empty closed jar labeled "vacuum".
 you get a pathfinding algorithm.
 You get an integer overflow.
 `POWER_DRIVER_STATE_FAILURE`
-
-
+You get one of these obese japanese teddy bears.
+You get a beehive.
+A sinlge wasp flies out the machine.
+You get a miniature saxophone.
+You receive a soda can filled with crude oil.
+The machine starts leaking a jet black fluid.
