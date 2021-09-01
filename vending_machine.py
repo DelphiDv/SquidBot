@@ -4,25 +4,28 @@ import os
 import io
 import random
 import asyncio
-
+script_path = os.path.dirname(__file__)
 
 
 @commands.command()
 async def vending_machine(ctx):
     """Buy an item from the vending machine."""
 
-    with open(r"C:\Users\jerem\OneDrive\Bureau\SquidBot\vending_machine.txt", "r", encoding="utf8") as vending_machine_file:
+    with open(script_path + "/vending_machine.txt", "r", encoding="utf8") as vending_machine_file:
         the_prize = random.choice(vending_machine_file.readlines())
     
-    with open(r"C:\Users\jerem\OneDrive\Bureau\SquidBot\titles.txt","r", encoding="utf8") as tf:
+    with open(script_path + "/titles.txt","r", encoding="utf8") as tf:
         the_title = random.choice(tf.readlines())
-    message = await ctx.send("you insert a coin in the machine...")
+    embed = discord.Embed(title="_You insert a coin in the vending machine..._", color=0x47e18a)
+    message = await ctx.send(content="", embed=embed)
+    
     await asyncio.sleep(3) # DRAMATIC TENSION
-    embed=discord.Embed(title="**" + the_title + "**", color=0x47e18a)
-    embed.set_thumbnail(url="https://media.discordapp.net/attachments/280298381807714304/776122672898768956/vending_machine.png")
-    embed.add_field(name="_ _", value= the_prize, inline=False)
-    embed.set_footer(text="VoidCorp™")
-    await message.edit(content="", embed=embed)
+    
+    embed2=discord.Embed(title="**" + the_title + "**", color=0x47e18a)
+    embed2.set_thumbnail(url="https://media.discordapp.net/attachments/280298381807714304/776122672898768956/vending_machine.png")
+    embed2.add_field(name="_ _", value= the_prize, inline=False)
+    embed2.set_footer(text="VoidCorp™")
+    await message.edit(content="", embed=embed2)
 
 
 def setup(bot):

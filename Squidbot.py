@@ -35,6 +35,8 @@ async def on_ready():
     print(f'ID: {bot.user.id}')
     print('----------------------')
 
+
+
 bot.load_extension('simple')
 bot.load_extension('check')
 bot.load_extension('joke')
