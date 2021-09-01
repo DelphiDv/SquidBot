@@ -4,8 +4,8 @@ import os
 import io
 import random
 import asyncio
-script_path = os.path.dirname(__file__)
 
+script_path = os.path.dirname(__file__)
 
 @commands.command()
 async def vending_machine(ctx):

@@ -15,11 +15,9 @@ import markovify
 import nltk
 import sys
 
+script_path = os.path.dirname(__file__)
 logger = logging.getLogger(__name__) 
 logger.setLevel(logging.INFO)
-
-
-
 bot = commands.Bot(command_prefix=squidconfig.prefix)
 bot.logger = logger
 API_TOKEN = squidconfig.token
@@ -48,7 +46,7 @@ async def ping(ctx):
     """ Respond with the bot's reponse time. """
     await ctx.send(f"Ping! Took **{round(bot.latency * 1000, 2)}** ms")
 
-with open("OneDrive\Bureau\SquidBot\mind.txt", encoding="utf8") as f:
+with open(script_path + "/mind.txt", encoding="utf8") as f:
     text = f.readlines()
 model = markovify.Text(text, state_size=1, well_formed = False, retain_original=False,)
 max_overlap_ratio = 40
