@@ -11,6 +11,9 @@ from discord import Attachment
 import logging
 from utils import SquidBed
 import random
+import markovify
+import nltk
+import sys
 
 logger = logging.getLogger(__name__) 
 logger.setLevel(logging.INFO)
@@ -43,6 +46,22 @@ async def ping(ctx):
     """ Respond with the bot's reponse time. """
     await ctx.send(f"Ping! Took **{round(bot.latency * 1000, 2)}** ms")
 
+with open("OneDrive\Bureau\SquidBot\mind.txt", encoding="utf8") as f:
+    text = f.readlines()
+model = markovify.Text(text, state_size=1, well_formed = False, retain_original=False,)
+max_overlap_ratio = 40
+max_overlap_total = 3
+print('----------------------')
+print('Model Loaded!')
+print('----------------------')
 
+#respond when tagged
+@bot.event
+async def on_message(message):
+    await bot.process_commands(message)
+    if message.author == bot.user:
+        return
+    elif BOT_NAME in message.content.lower() or bot.user.mentioned_in(message):
+        await message.channel.send(model.make_sentence(tries=50))
 
 bot.run(API_TOKEN)
