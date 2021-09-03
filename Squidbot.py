@@ -1,3 +1,4 @@
+from discord.ext.commands.errors import DisabledCommand
 import squidconfig
 import discord
 import os
@@ -14,6 +15,8 @@ import random
 import markovify
 import nltk
 import sys
+import aiosqlite
+
 
 script_path = os.path.dirname(__file__)
 logger = logging.getLogger(__name__) 
@@ -33,13 +36,12 @@ async def on_ready():
     print(f'ID: {bot.user.id}')
     print('----------------------')
 
-
-
 bot.load_extension('simple')
 bot.load_extension('check')
 bot.load_extension('joke')
 bot.load_extension('vending_machine')
-bot.load_extension('inspire')     
+bot.load_extension('inspire')    
+ 
  
 @bot.command()
 async def ping(ctx):
@@ -55,6 +57,9 @@ print('----------------------')
 print('Model Loaded!')
 print('----------------------')
 
+
+
+
 #respond when tagged
 @bot.event
 async def on_message(message):
@@ -64,4 +69,18 @@ async def on_message(message):
     elif BOT_NAME in message.content.lower() or bot.user.mentioned_in(message):
         await message.channel.send(model.make_sentence(tries=50))
 
+
+
+async def initialize():
+    await bot.wait_until_ready()
+    bot.db = await aiosqlite.connect(script_path + "/coins.db") 
+    await bot.db.execute("CREATE TABLE IF NOT EXISTS guildData (guild_id int, user_id int, balance int, PRIMARY KEY (guild_id, user_id))")
+    print("database sucess")
+
+
+
+
+bot.loop.create_task(initialize())
+
 bot.run(API_TOKEN)
+asyncio.run(bot.db.close())
