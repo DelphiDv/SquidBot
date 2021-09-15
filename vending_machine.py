@@ -11,10 +11,10 @@ script_path = os.path.dirname(__file__)
 async def vending_machine(ctx):
     """Buy an item from the vending machine."""
 
-    with open(script_path + "/vending_machine.txt", "r", encoding="utf8") as vending_machine_file:
+    with open(script_path + "/data/vending_machine.txt", "r", encoding="utf8") as vending_machine_file:
         the_prize = random.choice(vending_machine_file.readlines())
     
-    with open(script_path + "/titles.txt","r", encoding="utf8") as tf:
+    with open(script_path + "/data/titles.txt","r", encoding="utf8") as tf:
         the_title = random.choice(tf.readlines())
     embed = discord.Embed(title="_You insert a coin in the vending machine..._", color=0x47e18a)
     message = await ctx.send(content="", embed=embed)

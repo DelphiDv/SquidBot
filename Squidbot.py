@@ -48,7 +48,7 @@ async def ping(ctx):
     """ Respond with the bot's reponse time. """
     await ctx.send(f"Ping! Took **{round(bot.latency * 1000, 2)}** ms")
 
-with open(script_path + "/mind.txt", encoding="utf8") as f:
+with open(script_path + "/data/mind.txt", encoding="utf8") as f:
     text = f.readlines()
 model = markovify.Text(text, state_size=1, well_formed = False, retain_original=False,)
 max_overlap_ratio = 40
@@ -73,7 +73,7 @@ async def on_message(message):
 
 async def initialize():
     await bot.wait_until_ready()
-    bot.db = await aiosqlite.connect(script_path + "/coins.db") 
+    bot.db = await aiosqlite.connect(script_path + "/data/coins.db") 
     await bot.db.execute("CREATE TABLE IF NOT EXISTS guildData (guild_id int, user_id int, balance int, PRIMARY KEY (guild_id, user_id))")
     print("database sucess")
 
