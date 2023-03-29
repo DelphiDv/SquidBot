@@ -27,6 +27,6 @@ async def vending_machine(ctx):
     embed2.set_footer(text="VoidCorp™")
     await message.edit(content="", embed=embed2)
 
+async def setup(bot):
+    await bot.add_command(vending_machine(bot))
 
-def setup(bot):
-    bot.add_command(vending_machine)

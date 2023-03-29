@@ -18,5 +18,5 @@ async def squidball(ctx: commands.Context, *, question: str):
         embed.add_field(name="The great SquidBall says:", value= random.choice(answer_list), inline=False)
         await ctx.send(embed=embed)
 
-def setup(bot):
+async def setup(bot):
     bot.add_command(squidball)

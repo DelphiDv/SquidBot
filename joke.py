@@ -4,9 +4,9 @@ import random
 import asyncio
 
 
-class other(commands.Cog):
-    """funny commands"""
 
+class joke(commands.Cog):
+    """funny commands"""
     def __init__(self, bot):
         self.bot = bot
         
@@ -22,5 +22,6 @@ class other(commands.Cog):
 
 
 
-def setup(bot):
-    bot.add_cog(other(bot))
+
+async def setup(bot):
+    await bot.add_command(joke(bot))

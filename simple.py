@@ -54,5 +54,5 @@ class simple(commands.Cog):
         """Simple random number generator."""
         await ctx.send(random.randint(nu1, nu2))
 
-def setup(bot):
-    bot.add_cog(simple(bot))
+async def setup(bot):
+    bot.add_command(simple(bot))

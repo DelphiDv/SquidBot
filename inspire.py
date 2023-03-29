@@ -21,5 +21,7 @@ class inspire(commands.Cog):
         data = io.BytesIO(image.read())
         await ctx.send(file=discord.File(data,"inspirobot.jpg"))
     
-def setup(bot):
-    bot.add_cog(inspire(bot))
+
+    
+async def setup(bot):
+    await bot.add_command(inspire(bot))

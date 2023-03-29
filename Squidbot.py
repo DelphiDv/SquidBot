@@ -16,12 +16,14 @@ import markovify
 import nltk
 import sys
 import aiosqlite
-
+from discord import Intents
 
 script_path = os.path.dirname(__file__)
 logger = logging.getLogger(__name__) 
 logger.setLevel(logging.INFO)
-bot = commands.Bot(command_prefix=squidconfig.prefix)
+intents = discord.Intents.default()
+intents = discord.Intents.default()
+bot = commands.Bot(command_prefix=squidconfig.prefix,intents=intents)
 bot.logger = logger
 API_TOKEN = squidconfig.token
 BOT_NAME  = 'Squid_OS'
@@ -36,12 +38,12 @@ async def on_ready():
     print(f'ID: {bot.user.id}')
     print('----------------------')
 
-bot.load_extension('simple')
-bot.load_extension('check')
-bot.load_extension('joke')
-bot.load_extension('vending_machine')
-bot.load_extension('inspire')
-bot.load_extension('squidball')
+    await bot.load_extension('inspire')
+    await bot.load_extension('simple')
+    await bot.load_extension('check')
+    await bot.load_extension('joke')
+    await bot.load_extension('vending_machine')
+    await bot.load_extension('squidball')
  
  
 @bot.command()
@@ -72,16 +74,7 @@ async def on_message(message):
 
 
 
-async def initialize():
-    await bot.wait_until_ready()
-    bot.db = await aiosqlite.connect(script_path + "/data/coins.db") 
-    await bot.db.execute("CREATE TABLE IF NOT EXISTS guildData (guild_id int, user_id int, balance int, PRIMARY KEY (guild_id, user_id))")
-    print("database sucess")
 
-
-
-
-bot.loop.create_task(initialize())
 
 bot.run(API_TOKEN)
 asyncio.run(bot.db.close())
